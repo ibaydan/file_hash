@@ -1,32 +1,17 @@
 #!/bin/python3
-import os,hashlib,io,base64,pickle
+import os,hashlib,io,base64,pickle,lib
 
 from os.path import join, getsize
 
-hash_database=[]
 
+mn=lib.FileList()
 
-class fileobjects():
-    pass
+mn.search_path('/bin')
 
-for root, dirs, files in os.walk('/etc', followlinks=False):
-    print(root)
-    for file_name in files:
-        try:
-            f=open(root+"/"+file_name,"rb")
-            myline=f.read()
-            myhash=hashlib.sha224(myline).hexdigest()
-            print("\t"+file_name+"\t\t"+myhash+"\t"+str(os.stat(root+"/"+file_name).st_size))
-            hash_database.append([root+"/"+file_name,myhash])
-        except:
-            pass
+mn.show_list()
 
+mn.save_dump()
 
-#print(hash_database[:])
+mn.load_dump()
 
-for item in hash_database:
-    print(item)
-
-hash_dumped=open("hash_dumped","wb+")
-pickle.dump(hash_database,hash_dumped)
-hash_dumped.close()
+mn.show_list()
