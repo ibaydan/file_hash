@@ -1,3 +1,3 @@
 file_hash
 =========
-New functionality
+A simple tool that calculates hash of /bin directory and list them
